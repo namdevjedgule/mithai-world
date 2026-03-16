@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mithai World</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="top-bar">
+        <p class="slide-text">
+            🎉 Welcome to Mithai World | Fresh Sweets Made Daily | Order Now for Festival Offers 🎉
+        </p>
+    </div>
+
+    <nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <a href="#home" class="logo">
+            <img src="images/logo/mithai-world-logo.png" alt="Mithai World Logo">
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#category">Category</a></li>
+            <li><a href="#topsellers">Top Sellers</a></li>
+        </ul>
+
+    </nav>
+
+    <section id="home" class="hero">
+
+        <div class="hero-slider">
+
+            <div class="slider-track" id="sliderTrack">
+
+                <div class="slide slide1"></div>
+                <div class="slide slide2"></div>
+                <div class="slide slide3"></div>
+                <div class="slide slide4"></div>
+
+            </div>
+
+            <button class="arrow prev">&#10094;</button>
+            <button class="arrow next">&#10095;</button>
+
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            <div class="iso-badge-logo">
+                <img src="images/certificate/iso-certified-logo-removebg-preview.png" alt="ISO Certified">
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="bottom-bar">
+        <p class="slide-text">
+            <span> • Freshly made, just for you • Experience unmatched freshness with our MAP packaging •
+                Preservative-free
+                goodness. </span>
+        </p>
+    </div>
+
+    <section id="category" class="category-section">
+
+        <h2>Shop by Category</h2>
+
+        <div class="category-container">
+
+            <div class="category-card" data-category="snacks">
+                <img src="images/category/snacks.png" alt="Snacks">
+                <h3>Snacks</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+            <div class="category-card" data-category="seasonal">
+                <img src="images/category/seasonal.png" alt="Seasonal">
+                <h3>Seasonal</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+            <div class="category-card" data-category="milk">
+                <img src="images/category/milk-sweet.png" alt="Milk Sweets">
+                <h3>Milk Sweets</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+            <div class="category-card" data-category="desi">
+                <img src="images/category/desi-sweet.png" alt="desi">
+                <h3>Desi Sweets</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+            <div class="category-card" data-category="bengali">
+                <img src="images/category/bengali-sweet.png" alt="Bengali">
+                <h3>Bengali Sweets</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+            <div class="category-card" data-category="dairy">
+                <img src="images/category/dairy.png" alt="Dairy">
+                <h3>Dairy</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+
+            <div class="category-card" data-category="dryfruit">
+                <img src="images/category/dry-fruit.png" alt="Dryfruits">
+                <h3>Dryfruits Sweets</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+
+            <div class="category-card" data-category="north">
+                <img src="images/category/north-indian.png" alt="North Indian">
+                <h3>North Indian Sweets</h3>
+                <a href="#" class="shop-btn">SHOP ALL</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <div id="productPopup" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close-popup">&times;</span>
+
+            <h2 id="popupTitle"></h2>
+
+            <div class="popup-products" id="popupProducts"></div>
+
+        </div>
+
+    </div>
+
+    <section id="topsellers" class="top-sellers">
+
+        <h2>Top Sellers</h2>
+
+        <div class="slider">
+
+            <button class="prev-sellers sellers-arrows">&#10094;</button>
+
+            <div class="sellers-track" id="sellersTrack">
+
+                <div class="sellers-slide">
+
+                    <div class="product-card">
+                        <img src="images/products/gulab-jamun.jpg">
+                        <h3>Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/sev-barfi.jpg">
+                        <h3>Sev Barfi</h3>
+                        <p class="price">
+                            <span class="new" data-new="360">₹360</span>
+                            <span class="old" data-old="400">₹400</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/angoori-gulab-jamun.jpg">
+                        <h3>Angoori Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/motichoor-ladoo.jpg">
+                        <h3>Motichoor Ladoo</h3>
+                        <p class="price">
+                            <span class="new" data-new="300">₹300</span>
+                            <span class="old" data-old="320">₹320</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                </div>
+
+                <div class="sellers-slide">
+
+                    <div class="product-card">
+                        <img src="images/products/kesar-pista-gulab-jamun.jpg">
+                        <h3>Kesar Pista Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/kaju-katli.jpg">
+                        <h3>Kaju Katli</h3>
+                        <p class="price">
+                            <span class="new" data-new="360">₹360</span>
+                            <span class="old" data-old="400">₹400</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/kala-gulab-jamun.jpg">
+                        <h3>Kala Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/fafda.jpg">
+                        <h3>Fafda</h3>
+                        <p class="price">
+                            <span class="new" data-new="300">₹300</span>
+                            <span class="old" data-old="320">₹320</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                </div>
+
+                <div class="sellers-slide">
+
+                    <div class="product-card">
+                        <img src="images/products/gulab-jamun.jpg">
+                        <h3>Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/sev-barfi.jpg">
+                        <h3>Sev Barfi</h3>
+                        <p class="price">
+                            <span class="new" data-new="360">₹360</span>
+                            <span class="old" data-old="400">₹400</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/angoori-gulab-jamun.jpg">
+                        <h3>Angoori Gulab Jamun</h3>
+                        <p class="price">
+                            <span class="new" data-new="325">₹325</span>
+                            <span class="old" data-old="375">₹375</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                    <div class="product-card">
+                        <img src="images/products/motichoor-ladoo.jpg">
+                        <h3>Motichoor Ladoo</h3>
+                        <p class="price">
+                            <span class="new" data-new="300">₹300</span>
+                            <span class="old" data-old="320">₹320</span>
+                        </p>
+                        <select class="qty-select">
+                            <option value="400">400 gm</option>
+                            <option value="500">500 gm</option>
+                            <option value="1000">1 kg</option>
+                        </select>
+                        <button>Add to Cart</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="next-sellers sellers-arrows">&#10095;</button>
+
+        </div>
+
+    </section>
+
+    <section class="about-section">
+
+        <div class="about-container">
+
+            <div class="about-content slide-left">
+
+                <p class="about-subtitle">ABOUT US</p>
+                <h2>Our Journey</h2>
+
+                <p>
+                    At <strong>Mithai World</strong>, our journey began with a simple dream —
+                    to bring authentic traditional sweets made with the finest ingredients
+                    and heartfelt passion.
+                </p>
+
+                <p>
+                    From classic favorites like Kaju Katli and Motichoor Ladoo to modern
+                    fusion sweets, every product reflects our commitment to quality.
+                </p>
+
+                <a href="#" class="about-btn">Explore Our Sweets</a>
+
+            </div>
+
+            <div class="about-image slide-right">
+                <img src="images/about/mithai-world-shop.jpeg" alt="Mithai Shop">
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="festival-section">
+
+        <div class="festival-header">
+            <p class="subtitle">FESTIVAL SPECIALS</p>
+            <h2>Celebrate Every Occasion With Sweetness</h2>
+        </div>
+
+        <div class="festival-grid">
+
+            <div class="festival-card">
+                <img src="images/offers/diwali-special.jpg">
+                <div class="festival-overlay">
+                    <h3>Diwali Specials</h3>
+                </div>
+            </div>
+
+            <div class="festival-card">
+                <img src="images/offers/rakshabandhan.jpg">
+                <div class="festival-overlay">
+                    <h3>Raksha Bandhan</h3>
+                </div>
+            </div>
+
+            <div class="festival-card">
+                <img src="images/offers/wedding.jpg">
+                <div class="festival-overlay">
+                    <h3>Wedding Sweets</h3>
+                </div>
+            </div>
+
+            <div class="festival-card">
+                <img src="images/offers/gift.jpg">
+                <div class="festival-overlay">
+                    <h3>Gift Boxes</h3>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="testimonial-section">
+
+        <div class="testimonial-header">
+
+            <div class="testimonial-left">
+                <h2>Trusted by <span>15,000+</span><br>Happy Customers</h2>
+            </div>
+
+            <div class="testimonial-right">
+                <div class="google-rating">
+                    ⭐⭐⭐⭐⭐ <b>4.8 on Google</b>
+                </div>
+                <p>Real reviews from verified customers who love<br>Mithai World's sweets.</p>
+            </div>
+
+        </div>
+
+
+        <div class="testimonial-slider">
+
+            <div class="testimonial-track">
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar yellow">H</div>
+                        <div>
+                            <h4>Hardik Ghori</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        “A true gem for sweet lovers! Every bite was a burst of pure flavor,
+                        with fresh ingredients and impeccable quality.”
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar pink">P</div>
+                        <div>
+                            <h4>Priya Patel</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        "I have been eating these sweets for two years and the taste has never changed."
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar yellow">B</div>
+                        <div>
+                            <h4>Bhargav Nasit</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        "Absolutely delightful experience. Amazing variety of fresh sweets."
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar yellow">R</div>
+                        <div>
+                            <h4>Rohit Shah</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        "Best mithai shop in town. Quality and taste both are excellent."
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar pink">S</div>
+                        <div>
+                            <h4>Sneha Mehta</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        "Loved their Kaju Katli and Motichoor Ladoo. Highly recommended!"
+                    </p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="user">
+                        <div class="avatar yellow">A</div>
+                        <div>
+                            <h4>Amit Patel</h4>
+                            <span>Verified Google Review</span>
+                        </div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>
+                        "Great service and fresh sweets every time."
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="testimonial-bottom">
+
+            <div class="dots">
+                <span class="active"></span>
+                <span></span>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="gallery-section">
+
+        <h2>Sweet Moments Gallery</h2>
+
+        <div class="gallery-grid">
+
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.37.17 PM.jpeg">
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.37.17.jpeg">
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.37.18 PM.jpeg">
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.37.19 PM.jpeg">
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.37.20 PM.jpeg">
+            <img src="images/gallery/WhatsApp Image 2026-03-14 at 4.25.20 PM.jpeg">
+
+        </div>
+
+    </section>
+
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+            <div class="contact-info">
+
+                <h2>Order Your Favorite Mithai</h2>
+
+                <p>Visit our shop or place your order easily through phone or WhatsApp.</p>
+
+                <div class="contact-item">
+                    📞 <span>+91 9858106106</span>
+                </div>
+
+                <div class="contact-item">
+                    📍 <span>
+                        Shop no. 04, Roshma Residency,<br>
+                        Central Line, near HDFC Bank,<br>
+                        Konark Nagar, Clover Park,<br>
+                        Viman Nagar, Pune, Maharashtra 411014
+                    </span>
+                </div>
+
+                <div class="contact-item">
+                    ⏰ <span>Open Daily: 8:30 AM–10:30 PM</span>
+                </div>
+
+                <a href="https://wa.me/919858106106" class="whatsapp-btn">
+                    Order on WhatsApp
+                </a>
+
+            </div>
+
+            <div class="contact-map">
+
+                <iframe src="https://www.google.com/maps?q=Mithai+World+Viman+Nagar+Pune&output=embed" width="100%"
+                    height="350" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-col">
+
+                <h3>Mithai World</h3>
+
+                <p>
+                    Delivering authentic Indian sweets made with
+                    traditional recipes and premium ingredients.
+                </p>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>Quick Links</h4>
+
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Sweets</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>Our Specialties</h4>
+
+                <ul>
+                    <li>Kaju Katli</li>
+                    <li>Motichoor Ladoo</li>
+                    <li>Rasgulla</li>
+                    <li>Dry Fruit Barfi</li>
+                </ul>
+
+            </div>
+
+            <div class="footer-col">
+
+                <h4>Follow Us</h4>
+
+                <div class="social-links">
+
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Google</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>© 2026 Mithai World. All Rights Reserved.</p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
