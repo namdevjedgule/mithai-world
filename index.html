@@ -12,30 +12,7 @@
 
 <body>
 
-    <div class="top-bar">
-        <p class="slide-text">
-            🎉 Welcome to Mithai World | Fresh Sweets Made Daily | Order Now for Festival Offers 🎉
-        </p>
-    </div>
-
-    <nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <a href="#home" class="logo">
-            <img src="images/logo/mithai-world-logo.png" alt="Mithai World Logo">
-        </a>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#category">Category</a></li>
-            <li><a href="#topsellers">Top Sellers</a></li>
-        </ul>
-
-    </nav>
+    <div id="navbar"></div>
 
     <section id="home" class="hero">
 
@@ -82,73 +59,59 @@
 
         <div class="category-container">
 
-            <div class="category-card" data-category="snacks">
-                <img src="images/category/snacks.png" alt="Snacks">
+            <div class="category-card">
+                <img src="images/category/snacks.png" alt="Sweets">
                 <h3>Snacks</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="snack.html" class="shop-btn">SHOP ALL</a>
             </div>
 
-            <div class="category-card" data-category="seasonal">
+            <div class="category-card">
                 <img src="images/category/seasonal.png" alt="Seasonal">
                 <h3>Seasonal</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="seasonal.html" class="shop-btn">SHOP ALL</a>
             </div>
 
-            <div class="category-card" data-category="milk">
+            <div class="category-card">
                 <img src="images/category/milk-sweet.png" alt="Milk Sweets">
                 <h3>Milk Sweets</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="milkSweet.html" class="shop-btn">SHOP ALL</a>
             </div>
 
-            <div class="category-card" data-category="desi">
+            <div class="category-card">
                 <img src="images/category/desi-sweet.png" alt="desi">
                 <h3>Desi Sweets</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="desiSweet.html" class="shop-btn">SHOP ALL</a>
             </div>
 
-            <div class="category-card" data-category="bengali">
+            <div class="category-card">
                 <img src="images/category/bengali-sweet.png" alt="Bengali">
                 <h3>Bengali Sweets</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="bengaliSweet.html" class="shop-btn">SHOP ALL</a>
             </div>
 
-            <div class="category-card" data-category="dairy">
+            <div class="category-card">
                 <img src="images/category/dairy.png" alt="Dairy">
                 <h3>Dairy</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="dairy.html" class="shop-btn">SHOP ALL</a>
             </div>
 
 
-            <div class="category-card" data-category="dryfruit">
+            <div class="category-card">
                 <img src="images/category/dry-fruit.png" alt="Dryfruits">
                 <h3>Dryfruits Sweets</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="dryfruitsSweets.html" class="shop-btn">SHOP ALL</a>
             </div>
 
 
-            <div class="category-card" data-category="north">
+            <div class="category-card">
                 <img src="images/category/north-indian.png" alt="North Indian">
                 <h3>North Indian Sweets</h3>
-                <a href="#" class="shop-btn">SHOP ALL</a>
+                <a href="northIndian.html" class="shop-btn">SHOP ALL</a>
             </div>
 
         </div>
 
     </section>
-
-    <div id="productPopup" class="popup">
-
-        <div class="popup-content">
-
-            <span class="close-popup">&times;</span>
-
-            <h2 id="popupTitle"></h2>
-
-            <div class="popup-products" id="popupProducts"></div>
-
-        </div>
-
-    </div>
 
     <section id="topsellers" class="top-sellers">
 
@@ -457,16 +420,15 @@
 
                 <div class="testimonial-card">
                     <div class="user">
-                        <div class="avatar yellow">H</div>
+                        <div class="avatar yellow">N</div>
                         <div>
-                            <h4>Hardik Ghori</h4>
+                            <h4>Nandini Vengurlekar</h4>
                             <span>Verified Google Review</span>
                         </div>
                     </div>
                     <div class="stars">★★★★★</div>
                     <p>
-                        “A true gem for sweet lovers! Every bite was a burst of pure flavor,
-                        with fresh ingredients and impeccable quality.”
+                        “Best Pedas found here! I've never had peda and barfis so soft and fresh. ”
                     </p>
                 </div>
 
@@ -488,7 +450,7 @@
                     <div class="user">
                         <div class="avatar yellow">B</div>
                         <div>
-                            <h4>Bhargav Nasit</h4>
+                            <h4>Nishant Kumar</h4>
                             <span>Verified Google Review</span>
                         </div>
                     </div>
@@ -500,43 +462,46 @@
 
                 <div class="testimonial-card">
                     <div class="user">
-                        <div class="avatar yellow">R</div>
+                        <div class="avatar yellow">J</div>
                         <div>
-                            <h4>Rohit Shah</h4>
+                            <h4>Jagdish Sirvi</h4>
                             <span>Verified Google Review</span>
                         </div>
                     </div>
                     <div class="stars">★★★★★</div>
                     <p>
-                        "Best mithai shop in town. Quality and taste both are excellent."
+                        "All Sweets Have So Awesome Taste. Specially Kaju Katli Is Famous Sweet By Them Very Fast
+                        Service By Staff."
                     </p>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="user">
-                        <div class="avatar pink">S</div>
+                        <div class="avatar pink">L</div>
                         <div>
-                            <h4>Sneha Mehta</h4>
+                            <h4>Laxman Singh</h4>
                             <span>Verified Google Review</span>
                         </div>
                     </div>
                     <div class="stars">★★★★★</div>
                     <p>
-                        "Loved their Kaju Katli and Motichoor Ladoo. Highly recommended!"
+                        "Purshased sweets last night from mithai world vimannagar , the taste of sweets was very good .
+                        I loved the texture of sweets , properly balanced taste ."
                     </p>
                 </div>
 
                 <div class="testimonial-card">
                     <div class="user">
-                        <div class="avatar yellow">A</div>
+                        <div class="avatar yellow">J</div>
                         <div>
-                            <h4>Amit Patel</h4>
+                            <h4>Jayesh Choudhary</h4>
                             <span>Verified Google Review</span>
                         </div>
                     </div>
                     <div class="stars">★★★★★</div>
                     <p>
-                        "Great service and fresh sweets every time."
+                        "Very excited to visit again at mithai world , the juicy bengali sweets and the texture of
+                        ghewar will have my heart."
                     </p>
                 </div>
 
@@ -616,70 +581,7 @@
 
     </section>
 
-    <footer class="footer">
-
-        <div class="footer-container">
-
-            <div class="footer-col">
-
-                <h3>Mithai World</h3>
-
-                <p>
-                    Delivering authentic Indian sweets made with
-                    traditional recipes and premium ingredients.
-                </p>
-
-            </div>
-
-            <div class="footer-col">
-
-                <h4>Quick Links</h4>
-
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Sweets</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-
-            </div>
-
-            <div class="footer-col">
-
-                <h4>Our Specialties</h4>
-
-                <ul>
-                    <li>Kaju Katli</li>
-                    <li>Motichoor Ladoo</li>
-                    <li>Rasgulla</li>
-                    <li>Dry Fruit Barfi</li>
-                </ul>
-
-            </div>
-
-            <div class="footer-col">
-
-                <h4>Follow Us</h4>
-
-                <div class="social-links">
-
-                    <a href="#">Facebook</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Google</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-
-            <p>© 2026 Mithai World. All Rights Reserved.</p>
-
-        </div>
-
-    </footer>
+    <div id="footer"></div>
 
     <script src="js/script.js"></script>
 </body>

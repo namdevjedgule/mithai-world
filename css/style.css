@@ -667,11 +667,10 @@ border-radius:6px;
     transform:translateX(100px);
 }
 
-/* when visible */
 
-.show{
-    opacity:1;
-    transform:translateX(0);
+.show {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .festival-section{

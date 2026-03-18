@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dryfruit Products</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 135px;
+            padding: 0;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            font-size: 15px;
+            background: #fff8f0;
+            border-radius: 8px;
+            margin: 15px 20px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #ff6600;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #cc5200;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            color: #999;
+        }
+
+        h2 {
+            margin: 20px 0;
+        }
+
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            width: 300px;
+            height: 300px;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background: orange;
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkorange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <div class="breadcrumb">
+        <a href="index.html#category">← 🏠</a>
+        <span class="separator">/</span>
+        <span id="pageName"></span>
+    </div>
+
+    <h2>Dryfruit Products</h2>
+
+    <div class="product-container">
+
+        <div class="product-card">
+            <img src="images/products/kaju-katli.jpg" alt="Kaju Katli">
+            <h3>Kaju Katli</h3>
+            <p class="price">₹20</p>
+            <button onclick="orderNow('Kaju Katli')">Order Now</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/products/anjeer-roll.jpg" alt="Anjeer Roll">
+            <h3>Anjeer Roll</h3>
+            <p class="price">₹30</p>
+            <button onclick="orderNow('Anjeer Roll')">Order Now</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/products/pista-roll.jpg" alt="Pista Roll">
+            <h3>Pista Roll</h3>
+            <p class="price">₹40</p>
+            <button onclick="orderNow('Pista Roll')">Order Now</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/products/dry-fruit-burfi.jpg" alt="Dry Fruit Burfi">
+            <h3>Dry Fruit Burfi</h3>
+            <p class="price">₹35</p>
+            <button onclick="orderNow('Dry Fruit Burfi')">Order Now</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/products/apple-dry-fruit.jpg" alt="Apple Dry Fruit">
+            <h3>Apple Dry Fruit</h3>
+            <p class="price">₹25</p>
+            <button onclick="orderNow('Apple Dry Fruit')">Order Now</button>
+        </div>
+
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
