@@ -191,53 +191,94 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (sellersTrack) {
 
-    const sellersSlides = document.querySelectorAll(".sellers-slide");
-
     const nextSellers = document.querySelector(".next-sellers");
     const prevSellers = document.querySelector(".prev-sellers");
 
     let sellersIndex = 0;
 
+    let isDesktop = window.innerWidth > 576;
+
+    if (isDesktop) {
+
+      const slides = document.querySelectorAll(".sellers-slide");
+
+      const firstClone = slides[0].cloneNode(true);
+      const lastClone = slides[slides.length - 1].cloneNode(true);
+
+      firstClone.id = "firstClone";
+      lastClone.id = "lastClone";
+
+      sellersTrack.appendChild(firstClone);
+      sellersTrack.insertBefore(lastClone, sellersTrack.firstChild);
+
+      sellersIndex = 1;
+
+      sellersTrack.style.transform = `translateX(-100%)`;
+    }
+
+    function getItems() {
+      return window.innerWidth <= 576
+        ? document.querySelectorAll(".product-card")
+        : document.querySelectorAll(".sellers-track .sellers-slide");
+    }
+
     function updateSellers() {
-      sellersTrack.style.transform = `translateX(-${sellersIndex * 100}%)`;
+
+      if (window.innerWidth <= 576) {
+        const cardWidth = document.querySelector(".product-card").offsetWidth + 20;
+        sellersTrack.style.transform =
+          `translateX(-${sellersIndex * cardWidth}px)`;
+
+      } else {
+        sellersTrack.style.transition = "0.6s ease";
+        sellersTrack.style.transform =
+          `translateX(-${sellersIndex * 100}%)`;
+      }
     }
 
-    if (nextSellers) {
-      nextSellers.addEventListener("click", () => {
+    nextSellers.addEventListener("click", () => {
+
+      let items = getItems();
+
+      if (window.innerWidth <= 576) {
+        sellersIndex = (sellersIndex + 1) % items.length;
+      } else {
         sellersIndex++;
-        updateSellers();
-      });
-    }
+      }
 
-    if (prevSellers) {
-      prevSellers.addEventListener("click", () => {
+      updateSellers();
+    });
 
-        if (sellersIndex === 0) {
-          sellersIndex = sellersSlides.length - 2;
-          sellersTrack.style.transition = "none";
+    prevSellers.addEventListener("click", () => {
 
-          setTimeout(() => {
-            sellersTrack.style.transition = "transform 0.6s ease";
-            updateSellers();
-          }, 50);
-        } else {
-          sellersIndex--;
-          updateSellers();
-        }
+      let items = getItems();
 
-      });
-    }
+      if (window.innerWidth <= 576) {
+        sellersIndex = (sellersIndex - 1 + items.length) % items.length;
+      } else {
+        sellersIndex--;
+      }
+
+      updateSellers();
+    });
 
     sellersTrack.addEventListener("transitionend", () => {
 
-      if (sellersIndex === sellersSlides.length - 1) {
-        sellersTrack.style.transition = "none";
-        sellersIndex = 0;
-        sellersTrack.style.transform = `translateX(0%)`;
+      if (window.innerWidth <= 576) return;
 
-        setTimeout(() => {
-          sellersTrack.style.transition = "transform 0.6s ease";
-        }, 50);
+      const slides = document.querySelectorAll(".sellers-track .sellers-slide");
+
+      if (slides[sellersIndex].id === "firstClone") {
+        sellersTrack.style.transition = "none";
+        sellersIndex = 1;
+        sellersTrack.style.transform = `translateX(-100%)`;
+      }
+
+      if (slides[sellersIndex].id === "lastClone") {
+        sellersTrack.style.transition = "none";
+        sellersIndex = slides.length - 2;
+        sellersTrack.style.transform =
+          `translateX(-${sellersIndex * 100}%)`;
       }
 
     });
@@ -284,34 +325,139 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const cards = document.querySelectorAll(".testimonial-card");
     const slider = document.querySelector(".testimonial-slider");
-    const dots = document.querySelectorAll(".dots span");
+    const dotsContainer = document.querySelector(".dots");
 
-    let testimonialIndex = 0;
-    const cardsPerSlide = 3;
-    const totalSlides = Math.ceil(cards.length / cardsPerSlide);
+    let index = 0;
+    let interval;
 
-    function updateDots() {
-      dots.forEach(dot => dot.classList.remove("active"));
-      dots[testimonialIndex].classList.add("active");
+    // =========================
+    // ✅ RESPONSIVE COUNT
+    // =========================
+    function getCardsPerSlide() {
+      if (window.innerWidth <= 576) return 1;
+      if (window.innerWidth <= 992) return 2;
+      return 3;
     }
 
-    function slideTestimonials() {
+    let cardsPerSlide = getCardsPerSlide();
+    let totalSlides = Math.ceil(cards.length / cardsPerSlide);
 
-      testimonialIndex++;
+    // =========================
+    // ✅ CLONE FIRST SLIDE (FOR LOOP)
+    // =========================
+    function cloneFirstSlide() {
+      const firstGroup = Array.from(cards).slice(0, cardsPerSlide);
 
-      if (testimonialIndex >= totalSlides) {
-        testimonialIndex = 0;
+      firstGroup.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.classList.add("clone");
+        testimonialTrack.appendChild(clone);
+      });
+    }
+
+    cloneFirstSlide();
+
+    // =========================
+    // ✅ CREATE DOTS
+    // =========================
+    function createDots() {
+      dotsContainer.innerHTML = "";
+
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("span");
+
+        if (i === 0) dot.classList.add("active");
+
+        dot.addEventListener("click", () => {
+          index = i;
+          moveSlide();
+          resetAutoSlide();
+        });
+
+        dotsContainer.appendChild(dot);
       }
+    }
+
+    function updateDots() {
+      const dots = document.querySelectorAll(".dots span");
+
+      dots.forEach(dot => dot.classList.remove("active"));
+
+      if (dots[index % totalSlides]) {
+        dots[index % totalSlides].classList.add("active");
+      }
+    }
+
+    // =========================
+    // ✅ MOVE SLIDE
+    // =========================
+    function moveSlide() {
 
       const slideWidth = slider.offsetWidth;
 
+      testimonialTrack.style.transition = "transform 0.6s ease";
       testimonialTrack.style.transform =
-        "translateX(-" + (testimonialIndex * slideWidth) + "px)";
+        `translateX(-${index * slideWidth}px)`;
 
       updateDots();
     }
 
-    setInterval(slideTestimonials, 4000);
+    // =========================
+    // ✅ AUTO SLIDE (ONLY RIGHT)
+    // =========================
+    function autoSlide() {
+      index++;
+      moveSlide();
+    }
+
+    function startAutoSlide() {
+      interval = setInterval(autoSlide, 4000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(interval);
+      startAutoSlide();
+    }
+
+    // =========================
+    // ✅ LOOP RESET (IMPORTANT)
+    // =========================
+    testimonialTrack.addEventListener("transitionend", () => {
+
+      if (index >= totalSlides) {
+
+        testimonialTrack.style.transition = "none";
+        index = 0;
+
+        testimonialTrack.style.transform = `translateX(0px)`;
+      }
+
+    });
+
+    // =========================
+    // ✅ HANDLE RESIZE
+    // =========================
+    window.addEventListener("resize", () => {
+
+      cardsPerSlide = getCardsPerSlide();
+      totalSlides = Math.ceil(cards.length / cardsPerSlide);
+
+      testimonialTrack.innerHTML = "";
+      cards.forEach(card => testimonialTrack.appendChild(card));
+
+      cloneFirstSlide();
+
+      index = 0;
+
+      createDots();
+      moveSlide();
+    });
+
+    // =========================
+    // ✅ INIT
+    // =========================
+    createDots();
+    startAutoSlide();
   }
 
   function revealOnScroll() {
