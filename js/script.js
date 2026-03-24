@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ================= LOAD NAVBAR / FOOTER =================
-
   function loadHTML(id, file, callback) {
     fetch(file)
       .then(response => response.text())
@@ -12,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log(err));
   }
 
-  // Navbar load + hamburger
   loadHTML("navbar", "navbar.html", function () {
 
     const hamburger = document.getElementById("hamburger");
@@ -330,9 +327,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let index = 0;
     let interval;
 
-    // =========================
-    // ✅ RESPONSIVE COUNT
-    // =========================
     function getCardsPerSlide() {
       if (window.innerWidth <= 576) return 1;
       if (window.innerWidth <= 992) return 2;
@@ -342,9 +336,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let cardsPerSlide = getCardsPerSlide();
     let totalSlides = Math.ceil(cards.length / cardsPerSlide);
 
-    // =========================
-    // ✅ CLONE FIRST SLIDE (FOR LOOP)
-    // =========================
     function cloneFirstSlide() {
       const firstGroup = Array.from(cards).slice(0, cardsPerSlide);
 
@@ -357,9 +348,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cloneFirstSlide();
 
-    // =========================
-    // ✅ CREATE DOTS
-    // =========================
     function createDots() {
       dotsContainer.innerHTML = "";
 
@@ -388,9 +376,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // =========================
-    // ✅ MOVE SLIDE
-    // =========================
     function moveSlide() {
 
       const slideWidth = slider.offsetWidth;
@@ -402,9 +387,6 @@ document.addEventListener("DOMContentLoaded", function () {
       updateDots();
     }
 
-    // =========================
-    // ✅ AUTO SLIDE (ONLY RIGHT)
-    // =========================
     function autoSlide() {
       index++;
       moveSlide();
@@ -419,9 +401,6 @@ document.addEventListener("DOMContentLoaded", function () {
       startAutoSlide();
     }
 
-    // =========================
-    // ✅ LOOP RESET (IMPORTANT)
-    // =========================
     testimonialTrack.addEventListener("transitionend", () => {
 
       if (index >= totalSlides) {
@@ -434,9 +413,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    // =========================
-    // ✅ HANDLE RESIZE
-    // =========================
     window.addEventListener("resize", () => {
 
       cardsPerSlide = getCardsPerSlide();
@@ -453,9 +429,6 @@ document.addEventListener("DOMContentLoaded", function () {
       moveSlide();
     });
 
-    // =========================
-    // ✅ INIT
-    // =========================
     createDots();
     startAutoSlide();
   }
@@ -480,3 +453,54 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", revealOnScroll);
 
 });
+
+function orderNow(productName, price, unit) {
+
+  let quantity = prompt(`Enter Quantity (${unit}):`);
+  if (!quantity) return;
+
+  let total = price * quantity;
+
+  let phoneNumber = "919858106106";
+
+  let message = `Hello Mithai World! 👋
+I want to order:
+
+🍽 Product: ${productName}
+💰 Price: ₹${price} / ${unit}
+🔢 Quantity: ${quantity} ${unit}
+🧾 Total: ₹${total}
+
+Please confirm my order.`;
+
+  let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
+
+function orderTopSeller(button) {
+
+  const card = button.closest(".product-card");
+
+  const productName = card.querySelector("h3").innerText;
+
+  const priceText = card.querySelector(".new").innerText;
+  const quantitySelect = card.querySelector(".qty-select");
+
+  const quantity = quantitySelect.options[quantitySelect.selectedIndex].text;
+
+  let phoneNumber = "919858106106";
+
+  let message = `Hello Mithai World! 👋
+I want to order:
+
+🍽 Product: ${productName}
+⚖ Quantity: ${quantity}
+💰 Price: ${priceText}
+
+Please confirm my order.`;
+
+  let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
+}
