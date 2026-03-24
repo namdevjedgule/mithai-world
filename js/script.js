@@ -15,40 +15,54 @@ document.addEventListener("DOMContentLoaded", function () {
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("navLinks");
 
+    // ✅ Hamburger toggle
     if (hamburger && navLinks) {
-      hamburger.addEventListener("click", () => {
+      hamburger.addEventListener("click", function () {
         navLinks.classList.toggle("active");
         hamburger.classList.toggle("active");
       });
     }
 
-    document.getElementById("pageName").innerText = document.title;
+    // ✅ Close menu when clicking any link (mobile UX fix)
+    document.querySelectorAll("#navLinks a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (navLinks) navLinks.classList.remove("active");
+        if (hamburger) hamburger.classList.remove("active");
+      });
+    });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // ✅ Page name
+    const pageName = document.getElementById("pageName");
+    if (pageName) {
+      pageName.innerText = document.title;
+    }
+
+    // ✅ Smooth scroll FIX (only for index page links)
+    document.querySelectorAll('a[href^="index.html#"]').forEach(anchor => {
 
       anchor.addEventListener("click", function (e) {
 
-        const targetId = this.getAttribute("href");
-        const target = document.querySelector(targetId);
+        // If already on index page
+        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
 
-        if (!target) return;
+          const targetId = this.getAttribute("href").split("#")[1];
+          const target = document.getElementById(targetId);
 
-        e.preventDefault();
+          if (!target) return;
 
-        const nav = document.querySelector("nav");
-        const navbarHeight = nav ? nav.offsetHeight : 0;
+          e.preventDefault();
 
-        window.scrollTo({
-          top: target.offsetTop - navbarHeight,
-          behavior: "smooth"
-        });
+          const nav = document.querySelector("nav");
+          const navbarHeight = nav ? nav.offsetHeight : 0;
 
-        history.pushState(null, null, targetId);
+          window.scrollTo({
+            top: target.offsetTop - navbarHeight,
+            behavior: "smooth"
+          });
 
-        if (navLinks) navLinks.classList.remove("active");
-
+          history.pushState(null, null, "#" + targetId);
+        }
       });
-
     });
 
   });
@@ -502,5 +516,16 @@ Please confirm my order.`;
 
   let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
+  window.open(url, "_blank");
+}
+
+function goToFestival(name) {
+  let phone = "919858106106";
+
+  let msg = `Hello Mithai World! 🎉
+I am interested in your ${name}.
+Please share details and offers.`;
+
+  let url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
 }

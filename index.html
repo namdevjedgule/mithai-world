@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mithai World</title>
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -275,7 +276,7 @@
 
     </section>
 
-    <section class="about-section">
+    <section id="about" class="about-section">
 
         <div class="about-container">
 
@@ -295,7 +296,7 @@
                     fusion sweets, every product reflects our commitment to quality.
                 </p>
 
-                <a href="#" class="about-btn">Explore Our Sweets</a>
+                <a href="#category" class="about-btn">Explore Our Sweets</a>
 
             </div>
 
@@ -307,7 +308,7 @@
 
     </section>
 
-    <section class="festival-section">
+    <section id="festival" class="festival-section">
 
         <div class="festival-header">
             <p class="subtitle">FESTIVAL SPECIALS</p>
@@ -316,28 +317,28 @@
 
         <div class="festival-grid">
 
-            <div class="festival-card">
+            <div class="festival-card" onclick="goToFestival('Diwali Specials')">
                 <img src="images/offers/diwali-special.jpg">
                 <div class="festival-overlay">
                     <h3>Diwali Specials</h3>
                 </div>
             </div>
 
-            <div class="festival-card">
+            <div class="festival-card" onclick="goToFestival('Raksha Bandhan')">
                 <img src="images/offers/rakshabandhan.jpg">
                 <div class="festival-overlay">
                     <h3>Raksha Bandhan</h3>
                 </div>
             </div>
 
-            <div class="festival-card">
+            <div class="festival-card" onclick="goToFestival('Wedding Sweets')">
                 <img src="images/offers/wedding.jpg">
                 <div class="festival-overlay">
                     <h3>Wedding Sweets</h3>
                 </div>
             </div>
 
-            <div class="festival-card">
+            <div class="festival-card" onclick="goToFestival('Gift Boxes')">
                 <img src="images/offers/gift.jpg">
                 <div class="festival-overlay">
                     <h3>Gift Boxes</h3>
@@ -348,7 +349,7 @@
 
     </section>
 
-    <section class="testimonial-section">
+    <section id="testimonial" class="testimonial-section">
 
         <div class="testimonial-header">
 
@@ -471,7 +472,7 @@
 
     </section>
 
-    <section class="gallery-section">
+    <section id="gallery" class="gallery-section">
 
         <h2>Sweet Moments Gallery</h2>
 
@@ -488,7 +489,7 @@
 
     </section>
 
-    <section class="contact-section">
+    <section id="contact" class="contact-section">
 
         <div class="contact-container">
 
