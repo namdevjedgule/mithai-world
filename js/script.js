@@ -10,12 +10,13 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.log(err));
   }
 
+  loadHTML("cart", "cart.html");
+
   loadHTML("navbar", "navbar.html", function () {
 
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("navLinks");
 
-    // ✅ Hamburger toggle
     if (hamburger && navLinks) {
       hamburger.addEventListener("click", function () {
         navLinks.classList.toggle("active");
@@ -23,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // ✅ Close menu when clicking any link (mobile UX fix)
     document.querySelectorAll("#navLinks a").forEach(link => {
       link.addEventListener("click", () => {
         if (navLinks) navLinks.classList.remove("active");
@@ -31,18 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // ✅ Page name
     const pageName = document.getElementById("pageName");
     if (pageName) {
       pageName.innerText = document.title;
     }
 
-    // ✅ Smooth scroll FIX (only for index page links)
     document.querySelectorAll('a[href^="index.html#"]').forEach(anchor => {
 
       anchor.addEventListener("click", function (e) {
 
-        // If already on index page
         if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
 
           const targetId = this.getAttribute("href").split("#")[1];
@@ -468,28 +465,185 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function orderNow(productName, price, unit) {
+// ✅ Safe Load Cart
+let cart;
+try {
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+} catch (e) {
+  cart = [];
+  localStorage.removeItem("cart");
+}
+
+// ✅ Add to Cart
+function addToCart(name, price, unit) {
 
   let quantity = prompt(`Enter Quantity (${unit}):`);
-  if (!quantity) return;
 
-  let total = price * quantity;
+  if (!quantity || isNaN(quantity) || quantity <= 0) {
+    alert("Enter valid quantity!");
+    return;
+  }
 
-  let phoneNumber = "919858106106";
+  quantity = parseFloat(quantity);
 
-  let message = `Hello Mithai World! 👋
-I want to order:
+  let existing = cart.find(item => item.name === name);
 
-🍽 Product: ${productName}
-💰 Price: ₹${price} / ${unit}
-🔢 Quantity: ${quantity} ${unit}
-🧾 Total: ₹${total}
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({ name, price, unit, quantity });
+  }
 
-Please confirm my order.`;
+  updateCart();
+  alert("Added to cart ✅");
+}
 
-  let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+// ✅ Update Cart Count (TOTAL QTY 🔥)
+function updateCartCount() {
+  let countEl = document.getElementById("cartCount");
 
+  if (countEl) {
+    let totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    countEl.innerText = totalQty;
+  }
+}
+
+// ✅ Common Update Function
+function updateCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+// ✅ Load on page
+updateCartCount();
+
+// ✅ Open Cart
+function openCart() {
+
+  let cartBox = document.getElementById("cartBox");
+  if (!cartBox) return;
+
+  cartBox.style.display = "block";
+
+  let cartItems = document.getElementById("cartItems");
+  cartItems.innerHTML = "";
+
+  let grandTotal = 0;
+
+  cart.forEach((item, index) => {
+
+    let total = item.price * item.quantity;
+    grandTotal += total;
+
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <b>${item.name}</b><br>
+        ₹${item.price}/${item.unit}
+
+        <div class="qty-controls">
+          <button onclick="decreaseQty(${index})">-</button>
+          <span>${item.quantity}</span>
+          <button onclick="increaseQty(${index})">+</button>
+        </div>
+
+        <p>Total: ₹${total}</p>
+
+        <button class="remove-btn" onclick="removeItem(${index})">
+          Remove ❌
+        </button>
+
+        <hr>
+      </div>
+    `;
+  });
+
+  cartItems.innerHTML += `<h3>Total Bill: ₹${grandTotal}</h3>`;
+}
+
+// ✅ Increase Qty
+function increaseQty(index) {
+  cart[index].quantity += 1;
+  updateCart();
+  openCart();
+}
+
+// ✅ Decrease Qty
+function decreaseQty(index) {
+
+  if (cart[index].quantity > 1) {
+    cart[index].quantity -= 1;
+  } else {
+    cart.splice(index, 1);
+  }
+
+  updateCart();
+  openCart();
+}
+
+// ✅ Remove Item
+function removeItem(index) {
+  cart.splice(index, 1);
+  updateCart();
+  openCart();
+}
+
+// ✅ Checkout
+function checkout() {
+
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let grandTotal = 0;
+
+  let message = "🛍 *Mithai World Order*\n";
+  message += "━━━━━━━━━━━━━━━\n\n";
+
+  cart.forEach((item, index) => {
+
+    let total = item.price * item.quantity;
+    grandTotal += total;
+
+    message += `*${index + 1}. ${item.name}*\n`;
+    message += `   Price: ₹${item.price} / ${item.unit}\n`;
+    message += `   Quantity: ${item.quantity} ${item.unit}\n`;
+    message += `   Item Total: ₹${total}\n\n`;
+  });
+
+  message += "━━━━━━━━━━━━━━━\n";
+  message += `*Total Bill: ₹${grandTotal}*\n\n`;
+  message += "📍 Please confirm my order.\n🙏 Thank you!";
+
+  let url = `https://wa.me/918669586311?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
+
+  // Clear cart after order
+  cart = [];
+  localStorage.removeItem("cart");
+  updateCartCount();
+}
+
+// ✅ Close Cart
+function closeCart() {
+  let cartBox = document.getElementById("cartBox");
+  if (cartBox) cartBox.style.display = "none";
+}
+
+// ✅ Reset Cart
+function resetCart() {
+
+  if (!confirm("Clear cart?")) return;
+
+  cart = [];
+  localStorage.removeItem("cart");
+
+  updateCartCount();
+
+  let cartItems = document.getElementById("cartItems");
+  if (cartItems) {
+    cartItems.innerHTML = "<p>Cart is empty</p>";
+  }
 }
 
 function orderTopSeller(button) {
