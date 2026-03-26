@@ -120,7 +120,7 @@
             <img src="images/products/gajar-halwa.jpg" alt="Gajar Halwa">
             <h3>Gajar Halwa</h3>
             <p class="price">₹700/-KG</p>
-            <button onclick="addToCart('Gajar Halwa',700,'KG')">
+            <button onclick="openQtyModal('Gajar Halwa',700,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/gujiya.jpg" alt="Desi Ghee Gujiya">
             <h3>Desi Ghee Gujiya</h3>
             <p class="price">₹720/-KG</p>
-            <button onclick="addToCart('Desi Ghee Gujiya',720,'KG')">
+            <button onclick="openQtyModal('Desi Ghee Gujiya',720,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/modak.jpg" alt="Malai Modak">
             <h3>Malai Modak</h3>
             <p class="price">₹760/-KG</p>
-            <button onclick="addToCart('Malai Modak',760,'KG')">
+            <button onclick="openQtyModal('Malai Modak',760,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,12 +147,27 @@
             <img src="images/products/rabdi.jpg" alt="Rabdi">
             <h3>Rabdi</h3>
             <p class="price">₹880/-KG</p>
-            <button onclick="addToCart('Rabdi',880,'KG')">
+            <button onclick="openQtyModal('Rabdi',880,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
 
     </div>
+
+     <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 

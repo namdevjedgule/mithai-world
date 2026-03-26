@@ -120,7 +120,7 @@
             <img src="images/products/samosa.jpg" alt="Samosa">
             <h3>Samosa</h3>
             <p class="price">₹25/-PCS</p>
-            <button onclick="addToCart('Samosa',25,'PCS')">
+            <button onclick="openQtyModal('Samosa',25,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/dhokla.jpg" alt="Dhokla">
             <h3>Dhokla</h3>
             <p class="price">₹400/-KG</p>
-            <button onclick="addToCart('Dhokla',400,'KG')">
+            <button onclick="openQtyModal('Dhokla',400,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/jalebi.jpg" alt="Jalebi">
             <h3>Jalebi</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Jalebi',600,'KG')">
+            <button onclick="openQtyModal('Jalebi',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +147,7 @@
             <img src="images/products/pattis.jpg" alt="Veg Pattis">
             <h3>Veg Pattis</h3>
             <p class="price">₹35/-PCS</p>
-            <button onclick="addToCart('Veg Pattis',35,'PCS')">
+            <button onclick="openQtyModal('Veg Pattis',35,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,12 +156,27 @@
             <img src="images/products/kachori.jpg" alt="Kachori">
             <h3>Kachori</h3>
             <p class="price">₹25/-PCS</p>
-            <button onclick="addToCart('Kachori',25,'PCS')">
+            <button onclick="openQtyModal('Kachori',25,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
 
     </div>
+
+    <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 

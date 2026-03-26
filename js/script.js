@@ -465,7 +465,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// ✅ Safe Load Cart
 let cart;
 try {
   cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -474,50 +473,78 @@ try {
   localStorage.removeItem("cart");
 }
 
-// ✅ Add to Cart
-function addToCart(name, price, unit) {
+function showAlert(message, type = "success") {
 
-  let quantity = prompt(`Enter Quantity (${unit}):`);
+  let alertBox = document.getElementById("customAlert");
+
+  alertBox.innerText = message;
+  alertBox.className = `custom-alert show ${type}`;
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 2500);
+}
+
+let selectedProduct = {};
+
+function openQtyModal(name, price, unit) {
+  selectedProduct = { name, price, unit };
+
+  document.getElementById("productName").innerText = `Enter Quantity (${unit})`;
+  document.getElementById("qtyInput").value = "";
+
+  document.getElementById("qtyModal").style.display = "flex";
+}
+
+function closeQtyModal() {
+  document.getElementById("qtyModal").style.display = "none";
+}
+
+function confirmQty() {
+  let quantity = document.getElementById("qtyInput").value;
 
   if (!quantity || isNaN(quantity) || quantity <= 0) {
-    alert("Enter valid quantity!");
+    showAlert("Enter valid quantity!", "error");
     return;
   }
 
   quantity = parseFloat(quantity);
 
-  let existing = cart.find(item => item.name === name);
+  let existing = cart.find(item => item.name === selectedProduct.name);
 
   if (existing) {
     existing.quantity += quantity;
   } else {
-    cart.push({ name, price, unit, quantity });
+    cart.push({
+      name: selectedProduct.name,
+      price: selectedProduct.price,
+      unit: selectedProduct.unit,
+      quantity
+    });
   }
 
   updateCart();
-  alert("Added to cart ✅");
+
+  showAlert("Added to cart ✅", "success");
+
+  closeQtyModal();
 }
 
-// ✅ Update Cart Count (TOTAL QTY 🔥)
 function updateCartCount() {
   let countEl = document.getElementById("cartCount");
 
   if (countEl) {
-    let totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
-    countEl.innerText = totalQty;
+    countEl.innerText = cart.length;
   }
 }
 
-// ✅ Common Update Function
 function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
 
-// ✅ Load on page
 updateCartCount();
 
-// ✅ Open Cart
 function openCart() {
 
   let cartBox = document.getElementById("cartBox");
@@ -560,14 +587,12 @@ function openCart() {
   cartItems.innerHTML += `<h3>Total Bill: ₹${grandTotal}</h3>`;
 }
 
-// ✅ Increase Qty
 function increaseQty(index) {
   cart[index].quantity += 1;
   updateCart();
   openCart();
 }
 
-// ✅ Decrease Qty
 function decreaseQty(index) {
 
   if (cart[index].quantity > 1) {
@@ -580,18 +605,16 @@ function decreaseQty(index) {
   openCart();
 }
 
-// ✅ Remove Item
 function removeItem(index) {
   cart.splice(index, 1);
   updateCart();
   openCart();
 }
 
-// ✅ Checkout
 function checkout() {
 
   if (cart.length === 0) {
-    alert("Cart is empty!");
+    showAlert("Cart is empty!", "error");
     return;
   }
 
@@ -615,25 +638,22 @@ function checkout() {
   message += `*Total Bill: ₹${grandTotal}*\n\n`;
   message += "📍 Please confirm my order.\n🙏 Thank you!";
 
-  let url = `https://wa.me/918669586311?text=${encodeURIComponent(message)}`;
+  let url = `https://wa.me/919858106106?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 
-  // Clear cart after order
   cart = [];
   localStorage.removeItem("cart");
   updateCartCount();
 }
 
-// ✅ Close Cart
 function closeCart() {
   let cartBox = document.getElementById("cartBox");
   if (cartBox) cartBox.style.display = "none";
 }
 
-// ✅ Reset Cart
 function resetCart() {
 
-  if (!confirm("Clear cart?")) return;
+  showAlert("Cart cleared 🗑", "success");
 
   cart = [];
   localStorage.removeItem("cart");

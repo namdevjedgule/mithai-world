@@ -120,7 +120,7 @@
             <img src="images/products/kaju-katli.jpg" alt="Kaju Katli">
             <h3>Kaju Katli</h3>
             <p class="price">₹1400/-KG</p>
-            <button onclick="addToCart('Kaju Katli',1400,'KG')">
+            <button onclick="openQtyModal('Kaju Katli',1400,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/anjeer-roll.jpg" alt="Anjeer Roll">
             <h3>Anjeer Roll</h3>
             <p class="price">₹1400/-KG</p>
-            <button onclick="addToCart('Anjeer Roll',1400,'KG')">
+            <button onclick="openQtyModal('Anjeer Roll',1400,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/pista-roll.jpg" alt="Pista Roll">
             <h3>Pista Roll</h3>
             <p class="price">₹1800/-KG</p>
-            <button onclick="addToCart('Pista Roll',1800,'KG')">
+            <button onclick="openQtyModal('Pista Roll',1800,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +147,7 @@
             <img src="images/products/dry-fruit-burfi.jpg" alt="Dry Fruit Burfi">
             <h3>Dry Fruit Burfi</h3>
             <p class="price">₹1400/-KG</p>
-            <button onclick="addToCart('Dry Fruit Burfi',1400,'KG')">
+            <button onclick="openQtyModal('Dry Fruit Burfi',1400,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,12 +156,26 @@
             <img src="images/products/apple-dry-fruit.jpg" alt="Apple Dry Fruit">
             <h3>Apple Dry Fruit</h3>
             <p class="price">₹1400/-KG</p>
-            <button onclick="addToCart('Apple Dry Fruit',1400,'KG')">
+            <button onclick="openQtyModal('Apple Dry Fruit',1400,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
-
     </div>
+
+    <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 

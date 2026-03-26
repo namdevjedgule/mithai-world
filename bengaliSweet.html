@@ -120,7 +120,7 @@
             <img src="images/products/angoor-rasmalai.jpg" alt="Angoor Rasmalai">
             <h3>Angoor Rasmalai</h3>
             <p class="price">₹640/-KG</p>
-            <button onclick="addToCart('Angoor Rasmalai',640,'KG')">
+            <button onclick="openQtyModal('Angoor Rasmalai',640,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/rasmalai.jpg" alt="Rasmalai">
             <h3>Rasmalai</h3>
             <p class="price">₹640/-KG</p>
-            <button onclick="addToCart('Rasmalai',640,'KG')">
+            <button onclick="openQtyModal('Rasmalai',640,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/malai-rabdi.jpg" alt="Malai Rabdi">
             <h3>Malai Rabdi</h3>
             <p class="price">₹800/-KG</p>
-            <button onclick="addToCart('Malai Rabdi',800,'KG')">
+            <button onclick="openQtyModal('Malai Rabdi',800,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +147,7 @@
             <img src="images/products/gud-rasmalai.jpg" alt="Gud Rasmalai Sugarfree">
             <h3>Gud Rasmalai Sugarfree</h3>
             <p class="price">₹640/-KG</p>
-            <button onclick="addToCart('Gud Rasmalai Sugarfree',640,'KG')">
+            <button onclick="openQtyModal('Gud Rasmalai Sugarfree',640,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,12 +156,27 @@
             <img src="images/products/bengali-malai.jpg" alt="Bengali Malai Cham Cham">
             <h3>Bengali Malai Cham Cham</h3>
             <p class="price">₹700/-KG</p>
-            <button onclick="addToCart('Bengali Malai Cham Cham',700,'KG')">
+            <button onclick="openQtyModal('Bengali Malai Cham Cham',700,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
 
     </div>
+
+     <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 

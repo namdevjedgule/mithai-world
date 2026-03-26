@@ -253,6 +253,94 @@ nav {
     cursor: pointer;
 }
 
+.qty-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.qty-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    animation: popup 0.3s ease;
+}
+
+.qty-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.qty-actions button {
+    margin: 5px;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.qty-actions button:first-child {
+    background: #28a745;
+    color: white;
+}
+
+.qty-actions button:last-child {
+    background: #dc3545;
+    color: white;
+}
+
+@keyframes popup {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #222;
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+}
+
+.custom-alert.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.custom-alert.success {
+    background: #28a745;
+}
+
+.custom-alert.error {
+    background: #dc3545;
+}
+
 @media(max-width:768px) {
 
     nav {

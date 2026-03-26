@@ -120,7 +120,7 @@
             <img src="images/products/kharvas.jpg" alt="Kharvas">
             <h3>Kharvas</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Kharvas',600,'KG')">
+            <button onclick="openQtyModal('Kharvas',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/malai-kulfi.jpg" alt="Malai Kulfi">
             <h3>Malai Kulfi</h3>
             <p class="price">₹26/-PCS</p>
-            <button onclick="addToCart('Malai Kulfi',26,'PCS')">
+            <button onclick="openQtyModal('Malai Kulfi',26,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/paneer.jpg" alt="Paneer">
             <h3>Paneer</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Paneer',600,'KG')">
+            <button onclick="openQtyModal('Paneer',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +147,7 @@
             <img src="images/products/khoya-fika.jpg" alt="Khoya Fika">
             <h3>Khoya Fika</h3>
             <p class="price">₹500/-KG</p>
-            <button onclick="addToCart('Khoya Fika',500,'KG')">
+            <button onclick="openQtyModal('Khoya Fika',500,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,12 +156,27 @@
             <img src="images/products/dahi.jpg" alt="Dahi">
             <h3>Dahi</h3>
             <p class="price">₹180/-KG</p>
-            <button onclick="addToCart('Dahi',180,'KG')">
+            <button onclick="openQtyModal('Dahi',180,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
 
     </div>
+
+     <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 

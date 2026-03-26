@@ -120,7 +120,7 @@
             <img src="images/products/gulab-jamun.jpg" alt="Gulab Jamun Juicy">
             <h3>Gulab Jamun Juicy</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Gulab Jamun Juicy',600,'KG')">
+            <button onclick="openQtyModal('Gulab Jamun Juicy',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +129,7 @@
             <img src="images/products/gulab-jamun-dry.jpg" alt="Gulab Jamun Dry">
             <h3>Gulab Jamun Dry</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Gulab Jamun Dry',600,'KG')">
+            <button onclick="openQtyModal('Gulab Jamun Dry',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +138,7 @@
             <img src="images/products/balushahi.jpg" alt="Balushahi">
             <h3>Balushahi</h3>
             <p class="price">₹700/-KG</p>
-            <button onclick="addToCart('Balushahi',700,'KG')">
+            <button onclick="openQtyModal('Balushahi',700,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +147,7 @@
             <img src="images/products/sugar-gulab.jpg" alt="Sugar Coated Gulab Jamun">
             <h3>Sugar Coated Gulab Jamun</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="addToCart('Sugar Coated Gulab Jamun',600,'KG')">
+            <button onclick="openQtyModal('Sugar Coated Gulab Jamun',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,12 +156,26 @@
             <img src="images/products/badami-halwa.jpg" alt="Badami Halwa">
             <h3>Badami Halwa</h3>
             <p class="price">₹800/-KG</p>
-            <button onclick="addToCart('Badami Halwa',800,'KG')">
+            <button onclick="openQtyModal('Badami Halwa',800,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
-
     </div>
+
+     <div id="qtyModal" class="qty-modal">
+        <div class="qty-box">
+            <h3 id="productName">Enter Quantity</h3>
+
+            <input type="number" id="qtyInput" placeholder="Enter quantity" />
+
+            <div class="qty-actions">
+                <button onclick="confirmQty()">Add ✅</button>
+                <button onclick="closeQtyModal()">Cancel ❌</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customAlert" class="custom-alert"></div>
 
     <div id="cart"></div>
 
