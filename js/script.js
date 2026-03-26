@@ -532,10 +532,16 @@ function confirmQty() {
 
 function updateCartCount() {
   let countEl = document.getElementById("cartCount");
+  let cartIcon = document.querySelector(".cart-icon");
 
   if (countEl) {
     countEl.innerText = cart.length;
   }
+
+  cartIcon.classList.add("bounce");
+  setTimeout(() => {
+    cartIcon.classList.remove("bounce");
+  }, 300);
 }
 
 function updateCart() {
