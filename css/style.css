@@ -354,7 +354,8 @@ nav {
     animation: popup 0.3s ease;
 }
 
-.qty-box input {
+.qty-box input,
+.qty-box select {
     width: 100%;
     padding: 10px;
     margin: 15px 0;

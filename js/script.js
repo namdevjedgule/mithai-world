@@ -490,8 +490,19 @@ let selectedProduct = {};
 function openQtyModal(name, price, unit) {
   selectedProduct = { name, price, unit };
 
-  document.getElementById("productName").innerText = `Enter Quantity (${unit})`;
-  document.getElementById("qtyInput").value = "";
+  document.getElementById("productName").innerText = `Select Quantity (${unit})`;
+
+  let kgOptions = document.getElementById("kgOptions");
+  let qtyInput = document.getElementById("qtyInput");
+
+  if (unit === "KG") {
+    kgOptions.style.display = "block";
+    qtyInput.style.display = "none";
+  } else {
+    kgOptions.style.display = "none";
+    qtyInput.style.display = "block";
+    qtyInput.value = "";
+  }
 
   document.getElementById("qtyModal").style.display = "flex";
 }
@@ -501,14 +512,21 @@ function closeQtyModal() {
 }
 
 function confirmQty() {
-  let quantity = document.getElementById("qtyInput").value;
 
-  if (!quantity || isNaN(quantity) || quantity <= 0) {
-    showAlert("Enter valid quantity!", "error");
-    return;
+  let quantity;
+
+  if (selectedProduct.unit === "KG") {
+    quantity = parseFloat(document.getElementById("kgOptions").value);
+  } else {
+    quantity = document.getElementById("qtyInput").value;
+
+    if (!quantity || isNaN(quantity) || quantity <= 0) {
+      showAlert("Enter valid quantity!", "error");
+      return;
+    }
+
+    quantity = parseFloat(quantity);
   }
-
-  quantity = parseFloat(quantity);
 
   let existing = cart.find(item => item.name === selectedProduct.name);
 
@@ -524,9 +542,7 @@ function confirmQty() {
   }
 
   updateCart();
-
   showAlert("Added to cart ✅", "success");
-
   closeQtyModal();
 }
 
@@ -563,19 +579,37 @@ function openCart() {
 
   let grandTotal = 0;
 
+  if (cart.length === 0) {
+    cartItems.innerHTML = "<p>Your cart is empty 🛒</p>";
+    return;
+  }
+
   cart.forEach((item, index) => {
 
     let total = item.price * item.quantity;
     grandTotal += total;
 
+    let displayQty = item.quantity;
+
+    if (item.unit === "KG") {
+      if (item.quantity === 0.1) displayQty = "100 gm";
+      else if (item.quantity === 0.25) displayQty = "250 gm";
+      else if (item.quantity === 0.5) displayQty = "500 gm";
+      else if (item.quantity === 1) displayQty = "1 kg";
+      else displayQty = item.quantity + " kg"; 
+    } else {
+      displayQty = item.quantity + " PCS";
+    }
+
     cartItems.innerHTML += `
       <div class="cart-item">
+        
         <b>${item.name}</b><br>
         ₹${item.price}/${item.unit}
 
         <div class="qty-controls">
           <button onclick="decreaseQty(${index})">-</button>
-          <span>${item.quantity}</span>
+          <span>${displayQty}</span>
           <button onclick="increaseQty(${index})">+</button>
         </div>
 
@@ -590,21 +624,51 @@ function openCart() {
     `;
   });
 
-  cartItems.innerHTML += `<h3>Total Bill: ₹${grandTotal}</h3>`;
+  cartItems.innerHTML += `
+    <h3 style="margin-top:10px;">Total Bill: ₹${grandTotal}</h3>
+  `;
 }
 
 function increaseQty(index) {
-  cart[index].quantity += 1;
+
+  if (cart[index].unit === "KG") {
+
+    let steps = [0.1, 0.25, 0.5, 1];
+    let currentIndex = steps.indexOf(cart[index].quantity);
+
+    if (currentIndex < steps.length - 1) {
+      cart[index].quantity = steps[currentIndex + 1];
+    }
+
+  } else {
+    cart[index].quantity += 1;
+  }
+
   updateCart();
   openCart();
 }
 
 function decreaseQty(index) {
 
-  if (cart[index].quantity > 1) {
-    cart[index].quantity -= 1;
+  if (cart[index].unit === "KG") {
+
+    let steps = [0.1, 0.25, 0.5, 1];
+    let currentIndex = steps.indexOf(cart[index].quantity);
+
+    if (currentIndex > 0) {
+      cart[index].quantity = steps[currentIndex - 1];
+    } else {
+      cart.splice(index, 1);
+    }
+
   } else {
-    cart.splice(index, 1);
+
+    if (cart[index].quantity > 1) {
+      cart[index].quantity -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+
   }
 
   updateCart();
