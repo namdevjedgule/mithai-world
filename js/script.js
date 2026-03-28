@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    setInterval(nextSlide, 5000);
+    setInterval(nextSlide, 7000);
 
     let startX = 0;
 
