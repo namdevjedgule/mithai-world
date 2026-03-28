@@ -163,21 +163,6 @@ nav {
     display: none;
 }
 
-.cart-box {
-    display: none;
-    position: fixed;
-    right: 20px;
-    top: 135px;
-    width: 320px;
-    max-height: 80vh;
-    overflow-y: auto;
-    background: white;
-    padding: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-    border-radius: 10px;
-}
-
 .cart-icon {
     position: fixed;
     top: 25px;
@@ -266,70 +251,6 @@ nav {
     100% {
         transform: scale(1);
     }
-}
-
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.cart-item {
-    margin-bottom: 12px;
-}
-
-.cart-row {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-}
-
-.cart-row button {
-    margin: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.qty-controls {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin: 5px 0;
-}
-
-.qty-controls button {
-    padding: 4px 10px;
-    cursor: pointer;
-}
-
-.remove-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-.checkout-btn {
-    width: 100%;
-    background: green;
-    color: white;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.reset-btn {
-    width: 100%;
-    background: orange;
-    color: white;
-    padding: 10px;
-    margin-top: 8px;
-    border: none;
-    cursor: pointer;
 }
 
 .qty-modal {
@@ -665,9 +586,6 @@ nav {
     }
 }
 
-/* ========================= */
-/* 📱 MOBILE VIEW */
-/* ========================= */
 @media (max-width: 576px) {
     .category-container {
         grid-template-columns: repeat(2, 1fr);
@@ -713,15 +631,14 @@ nav {
 
 .sellers-track {
     display: flex;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s ease-in-out
 }
 
 .sellers-slide {
     min-width: 100%;
     flex-shrink: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .product-card {
@@ -730,6 +647,9 @@ nav {
     border-radius: 8px;
     text-align: center;
     transition: 0.3s;
+    width: calc(25% - 20px);
+    /* Always 4 cards */
+    flex-shrink: 0;
 }
 
 .product-card:hover {

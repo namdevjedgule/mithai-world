@@ -86,19 +86,6 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
-        button {
-            background: orange;
-            border: none;
-            padding: 10px 15px;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: darkorange;
-        }
     </style>
 </head>
 
@@ -120,7 +107,7 @@
             <img src="images/products/gajar-halwa.jpg" alt="Gajar Halwa">
             <h3>Gajar Halwa</h3>
             <p class="price">₹700/-KG</p>
-            <button onclick="openQtyModal('Gajar Halwa',700,'KG')">
+            <button onclick="addToCartUnified(this, 'Gajar Halwa',700,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +116,7 @@
             <img src="images/products/gujiya.jpg" alt="Desi Ghee Gujiya">
             <h3>Desi Ghee Gujiya</h3>
             <p class="price">₹720/-KG</p>
-            <button onclick="openQtyModal('Desi Ghee Gujiya',720,'KG')">
+            <button onclick="addToCartUnified(this, 'Desi Ghee Gujiya',720,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +125,7 @@
             <img src="images/products/modak.jpg" alt="Malai Modak">
             <h3>Malai Modak</h3>
             <p class="price">₹760/-KG</p>
-            <button onclick="openQtyModal('Malai Modak',760,'KG')">
+            <button onclick="addToCartUnified(this, 'Malai Modak',760,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +134,7 @@
             <img src="images/products/rabdi.jpg" alt="Rabdi">
             <h3>Rabdi</h3>
             <p class="price">₹880/-KG</p>
-            <button onclick="openQtyModal('Rabdi',880,'KG')">
+            <button onclick="addToCartUnified(this, 'Rabdi',880,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -175,8 +162,6 @@
     </div>
 
     <div id="customAlert" class="custom-alert"></div>
-
-    <div id="cart"></div>
 
     <div id="footer"></div>
 

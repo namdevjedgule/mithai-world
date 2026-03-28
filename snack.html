@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snacks</title>
+    <title>Snacks - Mithai World</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -86,19 +86,6 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
-
-        button {
-            background: orange;
-            border: none;
-            padding: 10px 15px;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: darkorange;
-        }
     </style>
 </head>
 
@@ -120,7 +107,7 @@
             <img src="images/products/samosa.jpg" alt="Samosa">
             <h3>Samosa</h3>
             <p class="price">₹25/-PCS</p>
-            <button onclick="openQtyModal('Samosa',25,'PCS')">
+            <button onclick="addToCartUnified(this, 'Samosa', 25, 'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -129,7 +116,7 @@
             <img src="images/products/dhokla.jpg" alt="Dhokla">
             <h3>Dhokla</h3>
             <p class="price">₹400/-KG</p>
-            <button onclick="openQtyModal('Dhokla',400,'KG')">
+            <button onclick="addToCartUnified(this, 'Dhokla', 400, 'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -138,7 +125,7 @@
             <img src="images/products/jalebi.jpg" alt="Jalebi">
             <h3>Jalebi</h3>
             <p class="price">₹600/-KG</p>
-            <button onclick="openQtyModal('Jalebi',600,'KG')">
+            <button onclick="addToCartUnified(this, 'Jalebi',600,'KG')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -147,7 +134,7 @@
             <img src="images/products/pattis.jpg" alt="Veg Pattis">
             <h3>Veg Pattis</h3>
             <p class="price">₹35/-PCS</p>
-            <button onclick="openQtyModal('Veg Pattis',35,'PCS')">
+            <button onclick="addToCartUnified(this, 'Veg Pattis',35,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -156,7 +143,7 @@
             <img src="images/products/kachori.jpg" alt="Kachori">
             <h3>Kachori</h3>
             <p class="price">₹25/-PCS</p>
-            <button onclick="openQtyModal('Kachori',25,'PCS')">
+            <button onclick="addToCartUnified(this, 'Kachori',25,'PCS')">
                 <i class="fa-solid fa-cart-plus"></i> Add to Cart
             </button>
         </div>
@@ -184,8 +171,6 @@
     </div>
 
     <div id="customAlert" class="custom-alert"></div>
-
-    <div id="cart"></div>
 
     <div id="footer"></div>
 

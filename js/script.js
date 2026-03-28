@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   loadHTML("navbar", "navbar.html", function () {
 
+    updateCartCount();
+
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("navLinks");
 
@@ -302,27 +304,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const newPriceEl = card.querySelector(".new");
       const oldPriceEl = card.querySelector(".old");
 
-      let baseNew = parseFloat(newPriceEl.dataset.new);
-      let baseOld = parseFloat(oldPriceEl.dataset.old);
+      let basePrice = parseFloat(newPriceEl.dataset.new);
+      let qty = parseFloat(this.value);
 
-      let quantity = this.value;
-
-      let newPrice = baseNew;
-      let oldPrice = baseOld;
-
-      if (quantity == 500) {
-        newPrice = baseNew * 1.25;
-        oldPrice = baseOld * 1.25;
-      }
-
-      if (quantity == 1000) {
-        newPrice = baseNew * 2.5;
-        oldPrice = baseOld * 2.5;
-      }
+      let newPrice = basePrice * qty;
+      let oldPrice = (basePrice * 1.1) * qty;
 
       newPriceEl.innerText = "₹" + Math.round(newPrice);
       oldPriceEl.innerText = "₹" + Math.round(oldPrice);
-
     });
 
   });
@@ -473,9 +462,14 @@ try {
   localStorage.removeItem("cart");
 }
 
+let currentProduct = "";
+let currentPrice = 0;
+let currentUnit = "";
+
 function showAlert(message, type = "success") {
 
   let alertBox = document.getElementById("customAlert");
+  if (!alertBox) return;
 
   alertBox.innerText = message;
   alertBox.className = `custom-alert show ${type}`;
@@ -485,178 +479,95 @@ function showAlert(message, type = "success") {
   }, 2500);
 }
 
-let selectedProduct = {};
-
-function openQtyModal(name, price, unit) {
-  selectedProduct = { name, price, unit };
-
-  document.getElementById("productName").innerText = `Select Quantity (${unit})`;
-
-  let kgOptions = document.getElementById("kgOptions");
-  let qtyInput = document.getElementById("qtyInput");
-
-  if (unit === "KG") {
-    kgOptions.style.display = "block";
-    qtyInput.style.display = "none";
-  } else {
-    kgOptions.style.display = "none";
-    qtyInput.style.display = "block";
-    qtyInput.value = "";
-  }
-
-  document.getElementById("qtyModal").style.display = "flex";
-}
-
-function closeQtyModal() {
-  document.getElementById("qtyModal").style.display = "none";
-}
-
-function confirmQty() {
-
-  let quantity;
-
-  if (selectedProduct.unit === "KG") {
-    quantity = parseFloat(document.getElementById("kgOptions").value);
-  } else {
-    quantity = document.getElementById("qtyInput").value;
-
-    if (!quantity || isNaN(quantity) || quantity <= 0) {
-      showAlert("Enter valid quantity!", "error");
-      return;
-    }
-
-    quantity = parseFloat(quantity);
-  }
-
-  let existing = cart.find(item => item.name === selectedProduct.name);
-
-  if (existing) {
-    existing.quantity += quantity;
-  } else {
-    cart.push({
-      name: selectedProduct.name,
-      price: selectedProduct.price,
-      unit: selectedProduct.unit,
-      quantity
-    });
-  }
-
-  updateCart();
-  showAlert("Added to cart ✅", "success");
-  closeQtyModal();
-}
-
 function updateCartCount() {
   let countEl = document.getElementById("cartCount");
   let cartIcon = document.querySelector(".cart-icon");
 
-  if (countEl) {
-    countEl.innerText = cart.length;
-  }
+  if (countEl) countEl.innerText = cart.length;
 
-  cartIcon.classList.add("bounce");
-  setTimeout(() => {
-    cartIcon.classList.remove("bounce");
-  }, 300);
+  if (cartIcon) {
+    cartIcon.classList.add("bounce");
+    setTimeout(() => cartIcon.classList.remove("bounce"), 300);
+  }
 }
 
 function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
+  renderCart();
 }
 
-updateCartCount();
 
-function openCart() {
+function renderCart() {
+  let container = document.getElementById("cartContainer");
+  if (!container) return;
 
-  let cartBox = document.getElementById("cartBox");
-  if (!cartBox) return;
-
-  cartBox.style.display = "block";
-
-  let cartItems = document.getElementById("cartItems");
-  cartItems.innerHTML = "";
-
-  let grandTotal = 0;
+  container.innerHTML = "";
 
   if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Your cart is empty 🛒</p>";
+    container.innerHTML = `<div class="empty">Your cart is empty 🛒</div>`;
     return;
   }
 
+  let total = 0;
+
   cart.forEach((item, index) => {
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
 
-    let total = item.price * item.quantity;
-    grandTotal += total;
+    let displayQty =
+      item.unit === "KG"
+        ? item.quantity + " kg"
+        : item.quantity + " PCS";
 
-    let displayQty = item.quantity;
+    container.innerHTML += `
+      <div class="cart-card">
+        <div class="cart-info">
+          <h4>${item.name}</h4>
+          <p>₹${item.price}/${item.unit}</p>
 
-    if (item.unit === "KG") {
-      if (item.quantity === 0.1) displayQty = "100 gm";
-      else if (item.quantity === 0.25) displayQty = "250 gm";
-      else if (item.quantity === 0.5) displayQty = "500 gm";
-      else if (item.quantity === 1) displayQty = "1 kg";
-      else displayQty = item.quantity + " kg"; 
-    } else {
-      displayQty = item.quantity + " PCS";
-    }
-
-    cartItems.innerHTML += `
-      <div class="cart-item">
-        
-        <b>${item.name}</b><br>
-        ₹${item.price}/${item.unit}
-
-        <div class="qty-controls">
-          <button onclick="decreaseQty(${index})">-</button>
-          <span>${displayQty}</span>
-          <button onclick="increaseQty(${index})">+</button>
+          <div class="qty-controls">
+            <button onclick="decreaseQty(${index})">-</button>
+            <span>${displayQty}</span>
+            <button onclick="increaseQty(${index})">+</button>
+          </div>
         </div>
 
-        <p>Total: ₹${total}</p>
-
-        <button class="remove-btn" onclick="removeItem(${index})">
-          Remove ❌
-        </button>
-
-        <hr>
+        <div class="cart-actions">
+          <p><b>₹${itemTotal}</b></p>
+          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+        </div>
       </div>
     `;
   });
 
-  cartItems.innerHTML += `
-    <h3 style="margin-top:10px;">Total Bill: ₹${grandTotal}</h3>
+  container.innerHTML += `
+    <div class="summary">
+      <h3>Total: ₹${total}</h3>
+      <button class="checkout-btn" onclick="checkout()">Order on WhatsApp</button>
+      <button class="reset-btn" onclick="reset()">reset</button>
+    </div>
   `;
 }
 
 function increaseQty(index) {
 
   if (cart[index].unit === "KG") {
-
-    let steps = [0.1, 0.25, 0.5, 1];
-    let currentIndex = steps.indexOf(cart[index].quantity);
-
-    if (currentIndex < steps.length - 1) {
-      cart[index].quantity = steps[currentIndex + 1];
-    }
-
+    cart[index].quantity += 0.25;
+    cart[index].quantity = parseFloat(cart[index].quantity.toFixed(2));
   } else {
     cart[index].quantity += 1;
   }
-
   updateCart();
-  openCart();
 }
 
 function decreaseQty(index) {
 
   if (cart[index].unit === "KG") {
 
-    let steps = [0.1, 0.25, 0.5, 1];
-    let currentIndex = steps.indexOf(cart[index].quantity);
-
-    if (currentIndex > 0) {
-      cart[index].quantity = steps[currentIndex - 1];
+    if (cart[index].quantity > 0.25) {
+      cart[index].quantity -= 0.25;
+      cart[index].quantity = parseFloat(cart[index].quantity.toFixed(2));
     } else {
       cart.splice(index, 1);
     }
@@ -672,13 +583,11 @@ function decreaseQty(index) {
   }
 
   updateCart();
-  openCart();
 }
 
 function removeItem(index) {
   cart.splice(index, 1);
   updateCart();
-  openCart();
 }
 
 function checkout() {
@@ -698,70 +607,132 @@ function checkout() {
     let total = item.price * item.quantity;
     grandTotal += total;
 
+    let displayQty;
+
+    if (item.unit === "KG") {
+      if (item.quantity === 0.1) displayQty = "100 gm";
+      else if (item.quantity === 0.25) displayQty = "250 gm";
+      else if (item.quantity === 0.5) displayQty = "500 gm";
+      else if (item.quantity === 1) displayQty = "1 kg";
+      else displayQty = item.quantity + " kg";
+    } else {
+      displayQty = item.quantity + " PCS";
+    }
+
     message += `*${index + 1}. ${item.name}*\n`;
     message += `   Price: ₹${item.price} / ${item.unit}\n`;
-    message += `   Quantity: ${item.quantity} ${item.unit}\n`;
+    message += `   Quantity: ${displayQty}\n`;
     message += `   Item Total: ₹${total}\n\n`;
   });
 
   message += "━━━━━━━━━━━━━━━\n";
   message += `*Total Bill: ₹${grandTotal}*\n\n`;
-  message += "📍 Please confirm my order.\n🙏 Thank you!";
+  message += "📍 Please confirm my order.\n";
+  message += "🙏 Thank you!";
 
-  let url = `https://wa.me/919858106106?text=${encodeURIComponent(message)}`;
+  const PHONE = "919858106106";
+  let url = `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 
   cart = [];
   localStorage.removeItem("cart");
-  updateCartCount();
+  updateCart();
 }
 
-function closeCart() {
-  let cartBox = document.getElementById("cartBox");
-  if (cartBox) cartBox.style.display = "none";
-}
+function reset() {
+  if (cart.length === 0) {
+    showAlert("Cart is already empty!", "error");
+    return;
+  }
 
-function resetCart() {
+  let confirmClear = confirm("Are you sure you want to clear the cart?");
 
-  showAlert("Cart cleared 🗑", "success");
+  if (!confirmClear) return;
 
   cart = [];
   localStorage.removeItem("cart");
 
-  updateCartCount();
+  updateCart(); 
 
-  let cartItems = document.getElementById("cartItems");
-  if (cartItems) {
-    cartItems.innerHTML = "<p>Cart is empty</p>";
+  showAlert("Cart cleared 🗑️", "success");
+}
+
+function addItemToCart(name, price, unit, quantity) {
+
+  let existing = cart.find(item => item.name === name && item.unit === unit);
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({ name, price, unit, quantity });
+  }
+
+  updateCart();
+  showAlert("Added to cart ✅", "success");
+}
+
+function addToCartUnified(button, name, price, unit) {
+
+  let card = button.closest(".product-card");
+  let select = card.querySelector(".qty-select");
+
+  if (select) {
+    let quantity = parseFloat(select.value);
+    addItemToCart(name, price, unit, quantity);
+
+  } else {
+    currentProduct = name;
+    currentPrice = price;
+    currentUnit = unit;
+
+    openQtyModal(name, unit);
   }
 }
 
-function orderTopSeller(button) {
+function openQtyModal(name, unit) {
+  currentProduct = name;
+  currentUnit = unit;
 
-  const card = button.closest(".product-card");
+  document.getElementById("qtyModal").style.display = "flex";
+  document.getElementById("productName").innerText = name;
 
-  const productName = card.querySelector("h3").innerText;
+  let kgOptions = document.getElementById("kgOptions");
+  let qtyInput = document.getElementById("qtyInput");
 
-  const priceText = card.querySelector(".new").innerText;
-  const quantitySelect = card.querySelector(".qty-select");
-
-  const quantity = quantitySelect.options[quantitySelect.selectedIndex].text;
-
-  let phoneNumber = "919858106106";
-
-  let message = `Hello Mithai World! 👋
-I want to order:
-
-🍽 Product: ${productName}
-⚖ Quantity: ${quantity}
-💰 Price: ${priceText}
-
-Please confirm my order.`;
-
-  let url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-  window.open(url, "_blank");
+  if (unit === "KG") {
+    kgOptions.style.display = "block";
+    qtyInput.style.display = "none";
+  } else {
+    kgOptions.style.display = "none";
+    qtyInput.style.display = "block";
+  }
 }
+
+function confirmQty() {
+  let quantity =
+    currentUnit === "KG"
+      ? parseFloat(document.getElementById("kgOptions").value)
+      : parseFloat(document.getElementById("qtyInput").value);
+
+  if (!quantity || quantity <= 0) {
+    showAlert("Enter valid quantity!", "error");
+    return;
+  }
+
+  addItemToCart(currentProduct, currentPrice, currentUnit, quantity);
+  closeQtyModal();
+}
+
+function closeQtyModal() {
+  document.getElementById("qtyModal").style.display = "none";
+}
+
+window.onload = function () {
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  updateCartCount();
+  renderCart();
+};
 
 function goToFestival(name) {
   let phone = "919858106106";
